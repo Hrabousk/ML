@@ -41,14 +41,14 @@ class Model:
         gradient_a0 = sum((self.predict(x0i, x1i) - yi) * x0i for x0i, x1i, yi in zip(x0, x1, y)) / len(y)
         gradient_a1 = sum((self.predict(x0i, x1i) - yi) * x1i for x0i, x1i, yi in zip(x0, x1, y)) / len(y)
 
-        # Calculate gradients for accuracy (using a simple approach, could be refined)
+        # Calculate gradients for accuracy (simple approach)
         accuracy_gradient_a = sum((self.predict(x0i, x1i) > 0.5) - yi for x0i, x1i, yi in zip(x0, x1, y)) / len(y)
         accuracy_gradient_a0 = sum(
             ((self.predict(x0i, x1i) > 0.5) - yi) * x0i for x0i, x1i, yi in zip(x0, x1, y)) / len(y)
         accuracy_gradient_a1 = sum(
             ((self.predict(x0i, x1i) > 0.5) - yi) * x1i for x0i, x1i, yi in zip(x0, x1, y)) / len(y)
 
-        # Combine both gradients, this allows you to adjust the importance of each metric
+        # Combine both gradients, this allows us to adjust the importance of each metric
         combined_gradient_a = gradient_a + accuracy_gradient_a
         combined_gradient_a0 = gradient_a0 + accuracy_gradient_a0
         combined_gradient_a1 = gradient_a1 + accuracy_gradient_a1
